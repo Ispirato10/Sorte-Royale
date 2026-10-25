@@ -1,0 +1,140 @@
+@import "tailwindcss";
+
+@layer utilities {
+  .font-cinzel {
+    font-family: 'Cinzel', serif;
+  }
+}
+
+@keyframes tumbler {
+  0% { transform: rotate(0deg) scale(1); }
+  25% { transform: rotate(90deg) scale(1.05); }
+  50% { transform: rotate(180deg) scale(1); }
+  75% { transform: rotate(270deg) scale(1.05); }
+  100% { transform: rotate(360deg) scale(1); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.6; filter: drop-shadow(0 0 15px rgba(234, 179, 8, 0.6)); }
+  50% { opacity: 1; filter: drop-shadow(0 0 30px rgba(234, 179, 8, 0.9)); }
+}
+
+.animate-tumbler {
+  animation: tumbler 5s linear infinite;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+@keyframes globe-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes globe-paddle {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(-360deg); }
+}
+
+.animate-globe-spin {
+  animation: globe-spin 3.5s linear infinite;
+}
+
+.animate-globe-paddle {
+  animation: globe-paddle 2s linear infinite;
+}
+
+.acrylic-globe {
+  background: radial-gradient(circle at 35% 25%, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.04) 38%, rgba(15, 23, 42, 0.65) 75%, rgba(2, 6, 23, 0.92) 100%);
+  box-shadow: 
+    inset 0 0 50px rgba(234, 179, 8, 0.35),
+    inset -8px -8px 25px rgba(0, 0, 0, 0.85),
+    inset 5px 5px 18px rgba(255, 255, 255, 0.6),
+    0 20px 40px -10px rgba(0, 0, 0, 0.9),
+    0 0 45px rgba(234, 179, 8, 0.25);
+}
+
+/* 3D Glossy Lottery Ball Spheres */
+.ball-3d-emerald {
+  background: radial-gradient(circle at 30% 30%, #a7f3d0 0%, #34d399 22%, #059669 58%, #047857 80%, #064e3b 100%);
+  box-shadow: inset -4px -5px 10px rgba(0, 0, 0, 0.65), inset 3px 3px 6px rgba(255, 255, 255, 0.8), 0 8px 18px -2px rgba(5, 150, 105, 0.45);
+}
+
+.ball-3d-purple {
+  background: radial-gradient(circle at 30% 30%, #f3e8ff 0%, #c084fc 25%, #9333ea 58%, #7e22ce 80%, #581c87 100%);
+  box-shadow: inset -4px -5px 10px rgba(0, 0, 0, 0.65), inset 3px 3px 6px rgba(255, 255, 255, 0.8), 0 8px 18px -2px rgba(147, 51, 234, 0.45);
+}
+
+.ball-3d-blue {
+  background: radial-gradient(circle at 30% 30%, #e0f2fe 0%, #38bdf8 25%, #0284c7 58%, #0369a1 80%, #0c4a6e 100%);
+  box-shadow: inset -4px -5px 10px rgba(0, 0, 0, 0.65), inset 3px 3px 6px rgba(255, 255, 255, 0.8), 0 8px 18px -2px rgba(2, 132, 199, 0.45);
+}
+
+.ball-3d-gold {
+  background: radial-gradient(circle at 30% 30%, #fef9c3 0%, #facc15 25%, #ca8a04 58%, #a16207 80%, #713f12 100%);
+  box-shadow: inset -4px -5px 10px rgba(0, 0, 0, 0.65), inset 3px 3px 6px rgba(255, 255, 255, 0.8), 0 8px 18px -2px rgba(202, 138, 4, 0.45);
+}
+
+.ball-3d-orange {
+  background: radial-gradient(circle at 30% 30%, #ffedd5 0%, #fb923c 25%, #ea580c 58%, #c2410c 80%, #7c2d12 100%);
+  box-shadow: inset -4px -5px 10px rgba(0, 0, 0, 0.65), inset 3px 3px 6px rgba(255, 255, 255, 0.8), 0 8px 18px -2px rgba(234, 88, 12, 0.45);
+}
+
+.ball-3d-red {
+  background: radial-gradient(circle at 30% 30%, #fee2e2 0%, #f87171 25%, #dc2626 58%, #b91c1c 80%, #7f1d1d 100%);
+  box-shadow: inset -4px -5px 10px rgba(0, 0, 0, 0.65), inset 3px 3px 6px rgba(255, 255, 255, 0.8), 0 8px 18px -2px rgba(220, 38, 38, 0.45);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #020617;
+}
+::-webkit-scrollbar-thumb {
+  background: #1e293b;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #334155;
+}
+
+/* Print optimization for ticket receipt */
+@media print {
+  header, nav, footer, button, .no-print {
+    display: none !important;
+  }
+
+  body {
+    background: #ffffff !important;
+    color: #0f172a !important;
+  }
+
+  .print-ticket-root {
+    background: #ffffff !important;
+    color: #0f172a !important;
+    box-shadow: none !important;
+    border: 2px solid #334155 !important;
+    max-width: 100% !important;
+    margin: 0 auto !important;
+    padding: 20px !important;
+  }
+
+  .print-ticket-root * {
+    color: #0f172a !important;
+    border-color: #cbd5e1 !important;
+    text-shadow: none !important;
+  }
+}

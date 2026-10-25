@@ -1,0 +1,6 @@
+{
+  "name": "Sorte Royale - Gerador de Loteria",
+  "description": "Gerador elegante e animado de números da loteria em 3D, com estatísticas e favoritos.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

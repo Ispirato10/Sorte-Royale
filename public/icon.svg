@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#020617"/>
+      <stop offset="50%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#020617"/>
+    </linearGradient>
+
+    <!-- Gold Frame Gradient -->
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fde047"/>
+      <stop offset="25%" stop-color="#f59e0b"/>
+      <stop offset="60%" stop-color="#d97706"/>
+      <stop offset="100%" stop-color="#78350f"/>
+    </linearGradient>
+
+    <!-- Crown Body Gradient -->
+    <linearGradient id="crownGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#fffbeb"/>
+      <stop offset="25%" stop-color="#fef08a"/>
+      <stop offset="60%" stop-color="#f59e0b"/>
+      <stop offset="100%" stop-color="#b45309"/>
+    </linearGradient>
+
+    <!-- Emerald Gem Gradient -->
+    <radialGradient id="emeraldGrad" cx="35%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#6ee7b7"/>
+      <stop offset="45%" stop-color="#10b981"/>
+      <stop offset="100%" stop-color="#064e3b"/>
+    </radialGradient>
+
+    <!-- 3D Glow Filter -->
+    <filter id="goldGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#f59e0b" flood-opacity="0.45"/>
+    </filter>
+
+    <filter id="emeraldGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#10b981" flood-opacity="0.6"/>
+    </filter>
+  </defs>
+
+  <!-- Dark Slate Background with Rounded Square -->
+  <rect width="512" height="512" rx="112" fill="url(#bgGrad)"/>
+  
+  <!-- Outer Golden Border -->
+  <rect x="20" y="20" width="472" height="472" rx="96" fill="none" stroke="url(#goldGrad)" stroke-width="8" opacity="0.8"/>
+  <rect x="32" y="32" width="448" height="448" rx="84" fill="none" stroke="#f59e0b" stroke-width="2" stroke-dasharray="10 8" opacity="0.35"/>
+
+  <!-- Inner Golden Emblem Base -->
+  <g filter="url(#goldGlow)">
+    <rect x="88" y="88" width="336" height="336" rx="72" fill="url(#goldGrad)"/>
+    
+    <!-- Inner Dark Core for Contrast -->
+    <rect x="100" y="100" width="312" height="312" rx="60" fill="#090d16"/>
+  </g>
+
+  <!-- Crown Icon Vector -->
+  <g filter="url(#goldGlow)">
+    <!-- Base Ribbon of Crown -->
+    <path d="M156 324 L356 324 L344 350 L168 350 Z" fill="url(#crownGrad)"/>
+    <rect x="164" y="330" width="184" height="6" rx="3" fill="#78350f" opacity="0.6"/>
+
+    <!-- Jewels on the base -->
+    <circle cx="196" cy="337" r="5" fill="url(#emeraldGrad)"/>
+    <circle cx="256" cy="337" r="7" fill="url(#emeraldGrad)"/>
+    <circle cx="316" cy="337" r="5" fill="url(#emeraldGrad)"/>
+
+    <!-- Crown Peaks / Body -->
+    <path d="M156 324 L142 208 L206 256 L256 166 L306 256 L370 208 L356 324 Z" 
+          fill="url(#crownGrad)" 
+          stroke="#78350f" 
+          stroke-width="3" 
+          stroke-linejoin="round"/>
+
+    <!-- Pearl/Gem Spheres on Crown Peaks -->
+    <circle cx="142" cy="204" r="14" fill="url(#crownGrad)" stroke="#78350f" stroke-width="2"/>
+    <circle cx="206" cy="254" r="11" fill="url(#crownGrad)" stroke="#78350f" stroke-width="2"/>
+    <circle cx="256" cy="160" r="18" fill="url(#crownGrad)" stroke="#78350f" stroke-width="2"/>
+    <circle cx="306" cy="254" r="11" fill="url(#crownGrad)" stroke="#78350f" stroke-width="2"/>
+    <circle cx="370" cy="204" r="14" fill="url(#crownGrad)" stroke="#78350f" stroke-width="2"/>
+
+    <!-- Center Emerald Jewel in the central peak -->
+    <polygon points="256,220 270,240 256,260 242,240" fill="url(#emeraldGrad)" filter="url(#emeraldGlow)"/>
+  </g>
+
+  <!-- Bottom-Right Emerald Badge with Lucky Sparkle -->
+  <g filter="url(#emeraldGlow)">
+    <circle cx="366" cy="366" r="46" fill="url(#emeraldGrad)" stroke="#064e3b" stroke-width="4"/>
+    <circle cx="366" cy="366" r="41" fill="none" stroke="#a7f3d0" stroke-width="2" opacity="0.7"/>
+    <!-- 4-point Sparkle Star -->
+    <path d="M366 338 Q366 366 394 366 Q366 366 366 394 Q366 366 338 366 Q366 366 366 338 Z" fill="#ffffff"/>
+    <circle cx="366" cy="366" r="3" fill="#fef08a"/>
+  </g>
+
+  <!-- Subtle Specular Arc -->
+  <path d="M120 120 Q256 80 392 120" stroke="#ffffff" stroke-width="4" stroke-linecap="round" opacity="0.3" fill="none"/>
+</svg>

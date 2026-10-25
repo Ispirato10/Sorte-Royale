@@ -7,12 +7,32 @@ import { StatsView } from './components/StatsView';
 import { WheelsView } from './components/WheelsView';
 import { HistoryView } from './components/HistoryView';
 import { AIConsultantView } from './components/AIConsultantView';
+import { PWAInstallModal } from './components/PWAInstallModal';
+import { PWAUpdateToast } from './components/PWAUpdateToast';
+import { usePWAInstall } from './hooks/usePWAInstall';
 import { GeneratedGame } from './types';
 import { soundManager } from './utils/sound';
 
 export default function App() {
   const [currentTab, setCurrentTab] = useState<TabType>('generator');
   const [soundEnabled, setSoundEnabled] = useState<boolean>(true);
+  const [showUpdateToast, setShowUpdateToast] = useState<boolean>(false);
+
+  // PWA Installation & Device Detection
+  const { isInstalled, isIOS, isModalOpen, openModal, dismissModal, install } = usePWAInstall();
+
+  // Listen for automatic PWA updates
+  useEffect(() => {
+    const handlePWAUpdate = () => {
+      setShowUpdateToast(true);
+      setTimeout(() => setShowUpdateToast(false), 6000);
+    };
+
+    window.addEventListener('sorte-royale-pwa-updated', handlePWAUpdate);
+    return () => {
+      window.removeEventListener('sorte-royale-pwa-updated', handlePWAUpdate);
+    };
+  }, []);
 
   // Persistent Favorites in localStorage
   const [favorites, setFavorites] = useState<GeneratedGame[]>(() => {
@@ -82,7 +102,6 @@ export default function App() {
   };
 
   const handleToggleFavorite = (id: string) => {
-    // Check in history first, or favorites
     const gameInHistory = history.find(h => h.id === id);
     const gameInFavs = favorites.find(f => f.id === id);
 
@@ -91,7 +110,6 @@ export default function App() {
     } else if (gameInHistory) {
       setFavorites(prev => [{ ...gameInHistory, isFavorite: true }, ...prev]);
     } else {
-      // If it's passed by id that might be in generator modal
       const found = history.find(h => h.id === id) || favorites.find(f => f.id === id);
       if (found) {
         const exists = favorites.some(f => f.id === id);
@@ -119,9 +137,18 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-['Outfit',sans-serif]">
-      <Header soundEnabled={soundEnabled} onToggleSound={handleToggleSound} />
+      {/* Header with PWA Install Button */}
+      <Header
+        soundEnabled={soundEnabled}
+        onToggleSound={handleToggleSound}
+        isPWAInstalled={isInstalled}
+        onOpenInstall={openModal}
+      />
+
+      {/* Navigation Bar */}
       <Navigation currentTab={currentTab} onTabChange={setCurrentTab} favoritesCount={favorites.length} />
 
+      {/* Main Content */}
       <main className="flex-1 pb-16">
         {currentTab === 'generator' && (
           <GeneratorView
@@ -155,9 +182,28 @@ export default function App() {
         )}
       </main>
 
+      {/* Friendly, Elegant PWA Install Modal */}
+      <PWAInstallModal
+        isOpen={isModalOpen}
+        isIOS={isIOS}
+        onInstall={install}
+        onClose={dismissModal}
+      />
+
+      {/* Automatic PWA Update Toast Notification */}
+      <PWAUpdateToast
+        show={showUpdateToast}
+        onDismiss={() => setShowUpdateToast(false)}
+      />
+
+      {/* Footer */}
       <footer className="border-t border-slate-900 bg-slate-950/80 py-6 px-4 text-center text-xs text-slate-500">
-        <p className="font-cinzel tracking-wider text-amber-500/70 font-semibold mb-1">SORTE ROYALE • LOTERIAS DO BRASIL</p>
-        <p>Gerador e conferidor estatístico independente para entretenimento. Jogue com responsabilidade.</p>
+        <p className="font-cinzel tracking-wider text-amber-500/70 font-semibold mb-1">
+          SORTE ROYALE • LOTERIAS DO BRASIL
+        </p>
+        <p>
+          Gerador e conferidor estatístico independente para entretenimento. Jogue com responsabilidade.
+        </p>
       </footer>
     </div>
   );
